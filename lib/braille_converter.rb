@@ -6,11 +6,6 @@ class BrailleConverter
   end
 
   def triple
-
+    "#{message}\n#{message}\n#{message}"
   end
 end
-
-
-# def repeat(text, n=2)
-#   3.times.message { do |msg| msg }
-# print [text] * n * ' '

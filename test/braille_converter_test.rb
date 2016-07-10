@@ -1,7 +1,7 @@
 gem 'minitest', '~> 5.9'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/braille_converter'
+require '../lib/braille_converter'
 
 class BrailleConverterTest < Minitest::Test
 
@@ -10,9 +10,6 @@ class BrailleConverterTest < Minitest::Test
     bc = BrailleConverter.new(message)
 
     assert_equal "Hello World", bc.message
-
-    hello = bc.message
-
-    assert_equal "Hello World\nHello World\nHello World", hello.triple
+    assert_equal "Hello World\nHello World\nHello World", bc.triple
   end
 end
