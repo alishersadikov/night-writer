@@ -5,16 +5,39 @@
 # containing 256 characters"
 
 class NightWriter
+  attr_reader :content
 
-  def self.read_and_write_contents
-    content = File.read(ARGV[0])
-    File.write(ARGV[1], content)
+  def self.read_contents
+    @content = File.read(ARGV[0])
+  end
 
-    puts "Created #{ARGV[1]} containing #{content.length} characters"
+  def self.write_contents
+    File.write(ARGV[1], @content)
+  end
+
+  def self.verify_the_write
+      puts "Created #{ARGV[1]} containing #{@content.length} characters"
   end
 end
 
-NightWriter.read_and_write_contents
+
+NightWriter.read_contents
+NightWriter.write_contents
+NightWriter.verify_the_write
+
+# class NightWriter
+#
+#   def self.read_and_write_contents
+#     content = File.read(ARGV[0])
+#     File.write(ARGV[1], content)
+#
+#     puts "Created #{ARGV[1]} containing #{content.length} characters"
+#   end
+# end
+#
+# NightWriter.read_and_write_contents
+
+
 # (3) define a method that can copy file content from ARGV[0] and print to
 # ARGV[1] 3 times.
 
