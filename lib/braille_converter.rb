@@ -12,4 +12,7 @@ class BrailleConverter
     "#{message}\n#{message}\n#{message}"
   end
 
+  def array_converter
+  end 
+
 end

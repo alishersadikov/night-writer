@@ -16,7 +16,6 @@ class BrailleTranslatorTest < Minitest::Test
   end
 
   def test_if_one_number_is_translated
-
     bt = BrailleTranslator.new
 
     assert_equal "b", bt.inverted_char_translator(["0.","0.",".."])
@@ -24,6 +23,14 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal "0", bt.inverted_num_translator([".0","00",".."])
   end
 
-  # def test_if_two_characters_are_translated
+  def test_it_
+
+  # assert_equal ["0.", "0."], bt.("he")
+
+
+  # def test_it_translates_a_set_of_characters
+  #   word = "the"
+  #   bt = BrailleTranslator.new(word)
+  # end
 
 end
