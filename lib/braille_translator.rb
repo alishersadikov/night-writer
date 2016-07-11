@@ -2,20 +2,20 @@ require_relative 'braille_alphabet'
 require 'pry'
 
 class BrailleTranslator
-  attr_reader :character,
-              :braille_alphabet
 
-  def initialize(character)
-    @character = character
-    @braille_alphabet = BrailleAlphabet.new
+  def character_translator(char)
+     BRAILLE_CHARACTERS[char]
   end
 
-#   def braille_alphabet
-#     BrailleAlphabet.new
-#
-# end
+  def number_translator(num)
+     BRAILLE_NUMBERS[num]
+  end
 
-  def character_translator
-     @braille_alphabet.letters[character]
+  def inverted_char_translator(braille_char)
+    BRAILLE_CHAR_INVERTED[braille_char]
+  end
+
+  def inverted_num_translator(braille_num)
+    BRAILLE_NUM_INVERTED[braille_num]
   end
 end

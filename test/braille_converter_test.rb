@@ -15,4 +15,19 @@ class BrailleConverterTest < Minitest::Test
     assert_equal "Hello World\nHello World\nHello World", bc.triple
     # binding.pry
   end
+
+
+  #
+  # def test_if_a_word_is_translated
+  #   word = "hello"
+  #   bc = BrailleConverter.new(word)
+  #
+  #   assert_equal "hello", bc.word
+  #   assert_equal "", bc.
+  # end
+  #
+  # def test_it_translates_a_set_of_characters
+  #   word = "the"
+  #   bt = BrailleTranslator.new(word)
+
 end
