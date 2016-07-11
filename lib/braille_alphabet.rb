@@ -1,7 +1,11 @@
-module BrailleAlphabet
-  attr_reader :key
+class BrailleAlphabet
+  attr_reader :letters,
+              :special,
+              :numbers,
+              :transposer
 
-    LETTERS = { "a" => ["0.","..",".."],
+  def initialize
+    @letters = { "a" => ["0.","..",".."],
                 "b" => ["0.","0.",".."],
                 "c" => ["00","..",".."],
                 "d" => ["00",".0",".."],
@@ -27,8 +31,10 @@ module BrailleAlphabet
                 "x" => ["00","..","00"],
                 "y" => ["00",".0","00"],
                 "z" => ["0.",".0","00"] }
+                # "z" => "0..000"
+    @letter_transposer = @letters.invert
 
-    SPECIAL = { "!" => ["..","00","0."],
+    @special = { "!" => ["..","00","0."],
                 "'" => ["..","..","0."],
                 "," => ["..","0.",".."],
                 "-" => ["..","..","00"],
@@ -37,7 +43,9 @@ module BrailleAlphabet
             "shift" => ["..","..",".0"],
                 " " => ["..","..",".."] }
 
-    NUMBERS = { "#" => [".0",".0","00"],
+    @special_transposer = @special.invert
+
+    @numbers = { "#" => [".0",".0","00"],
                 "0" => [".0","00",".."],
                 "1" => ["0.","..",".."],
                 "2" => ["0.","0.",".."],
@@ -48,4 +56,8 @@ module BrailleAlphabet
                 "7" => ["00","00",".."],
                 "8" => ["0.","00",".."],
                 "9" => [".0","0.",".."] }
+
+    @numbers_transposer = @numbers.invert
+
+  end
 end
