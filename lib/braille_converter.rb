@@ -1,3 +1,6 @@
+# require_relative 'braille_alphabet'
+require 'pry'
+
 class BrailleConverter
   attr_reader :message
 
@@ -8,4 +11,5 @@ class BrailleConverter
   def triple
     "#{message}\n#{message}\n#{message}"
   end
+
 end
