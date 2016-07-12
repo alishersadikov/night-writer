@@ -48,7 +48,7 @@ class BrailleConverterTest < Minitest::Test
     phrase = "HI, world!"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
+    assert_equal [["..","..",".0"], ["0.", "00", ".."], ["..","..",".0"], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
   end
 
   def test_it_converts_numbers_into_encoded_braille_text
@@ -59,7 +59,7 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_it_transposes_the_braille_array
-    skip
+
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 
@@ -67,7 +67,7 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_if_transposed_are_joined
-    skip
+
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 
@@ -75,7 +75,7 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_if_message_translated_to_braille
-    skip
+
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 

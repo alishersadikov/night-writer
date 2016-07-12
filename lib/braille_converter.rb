@@ -31,7 +31,18 @@ class BrailleConverter
 
   def encode_braille_characters
     @separated_message.map do |char|
-      @bt.character_translator(char.downcase)
+      if
+        char == char.upcase
+        @braille_characters << @bt.character_translator(char.downcase)
+        @braille_characters << @bt.character_translator("shift")
+        @braille_characters.last
+
+      elsif
+        char == char.downcase
+        @braille_characters << @bt.character_translator(char.downcase)
+        @braille_characters.last
+
+      end
     end
   end
   #array_converter
@@ -52,20 +63,20 @@ class BrailleConverter
   #   end
   # end
 
-  # def transpose_array
-  #   encode_braille_characters.transpose
-  # end
-  #
-  # def join_array
-  #   transpose_array.map do |element|
-  #     element.join
-  #   end
-  # end
-  #
-  # def convert_to_full_braille
-  #   join_array.map { |position| "#{position}"}.join("\n")
-  #
-  # end
+  def transpose_array
+    encode_braille_characters.transpose
+  end
+
+  def join_array
+    transpose_array.map do |element|
+      element.join
+    end
+  end
+
+  def convert_to_full_braille
+    join_array.map { |position| "#{position}"}.join("\n")
+
+  end
 
 
 

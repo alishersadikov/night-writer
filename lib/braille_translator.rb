@@ -6,9 +6,20 @@ class BrailleTranslator
 
   def initialize
     @message_array = []
+  end
+
+  def translator_chooser(char)
+    if BRAILLE_CHARACTERS[char]
+
+  end
+
 
   def character_translator(char)
      BRAILLE_CHARACTERS[char]
+  end
+
+  def special_translator(spec)
+    BRAILLE_SPECIAL[spec]
   end
 
   def number_translator(num)
