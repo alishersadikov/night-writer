@@ -4,28 +4,51 @@ require 'pry'
 
 class BrailleConverter
   attr_reader :message,
-              :message_array,
-              :braille_array
+              :separated_message,
+              #message_array
+              :braille_characters
+              #braille_array
+              # :braille_numbers
+              # # + braille_num_array
 
   def initialize(message)
     @message = message
-    @message_array = message_converter(message)
-    @braille_array = []
+    @separated_message = separate_characters(message)
+    @braille_characters = []
+    @braille_numbers = []
     @bt = BrailleTranslator.new
   end
 
-  def triple
+  def triple_message
     "#{message}\n#{message}\n#{message}"
   end
+  #triple
 
-  def message_converter(message)
-# require "pry"; binding.pry
+  def separate_characters(message)
     message.chars
   end
-  # require "pry"; binding.pry
-  def array_converter
-    @message_array.map do |character|
-      @bt.character_translator(character)
+  #message_converter
+
+  def encode_braille_character
+    @separated_message.map do |char|
+      @bt.character_translator(char.downcase)
+    end
+  end
+  #array_converter
+
+  def braille_num_encoder
+    @separated_message.map do |num|
+      @bt.number_translator(num)
+    end
+  end
+
+  def full_braille_encoder
+    @separated_message.map.with_index do |char, num|
+      if char == BRAILLE_CHARACTERS
+        @bt.character_translator(char.downcase)
+      else
+        @bt.number_translator(num)
+      end
     end
   end
 
