@@ -41,18 +41,25 @@ class BrailleConverterTest < Minitest::Test
     word = "world!"
     bc = BrailleConverter.new(word)
 
-    assert_equal [[".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."],["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_character
+    assert_equal [[".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."],["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
   end
 
   def test_it_converts_a_phrase_into_encoded_braille_text
     phrase = "HI, world!"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_character
+    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
   end
 
-<<<<<<< HEAD
+  def test_it_converts_numbers_into_encoded_braille_text
+    numbers = "#1606#"
+    bc = BrailleConverter.new(numbers)
+
+    assert_equal [[".0", ".0", "00"], ["0.", "..", ".."], ["00", "0.", ".."], [".0", "00", ".."], ["00", "0.", ".."], [".0", ".0", "00"]], bc.encode_braille_numbers
+  end
+
   def test_it_transposes_the_braille_array
+    skip
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 
@@ -60,6 +67,7 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_if_transposed_are_joined
+    skip
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 
@@ -67,25 +75,19 @@ class BrailleConverterTest < Minitest::Test
   end
 
   def test_if_message_translated_to_braille
+    skip
     phrase = "wo"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal ".00.\n00.0\n0.0.", bc.convert_to_braille
+    assert_equal ".00.\n00.0\n0.0.", bc.convert_to_full_braille
 
   end
 
-  def test_it_converts_numbers_into_encoded_braille_text
-    numbers = "#1606#"
-    bc = BrailleConverter.new(numbers)
-
-    assert_equal [[".0", ".0", "00"], ["0.", "..", ".."], ["00", "0.", ".."], [".0", "00", ".."], ["00", "0.", ".."], [".0", ".0", "00"]], bc.braille_num_encoder
-  end
-
-  def test_it_converts_a_full_message_into_encoded_braille_text
-    message = "We are #1.ALISHER and #2.KINAN !!!"
-    bc = BrailleConverter.new(message)
-
-    assert_equal [[]], bc.full_braille_encoder
-  end
+  # def test_it_converts_a_full_message_into_encoded_braille_text
+  #   message = "We are #1.ALISHER and #2.KINAN !!!"
+  #   bc = BrailleConverter.new(message)
+  #
+  #   assert_equal [[]], bc.convert_to_braille_char_and_num
+  # end
 
 end
