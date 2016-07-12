@@ -23,14 +23,4 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal "0", bt.inverted_num_translator([".0","00",".."])
   end
 
-  # def test_it_
-
-  # assert_equal ["0.", "0."], bt.("he")
-
-
-  # def test_it_translates_a_set_of_characters
-  #   word = "the"
-  #   bt = BrailleTranslator.new(word)
-  # end
-
 end
