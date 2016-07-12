@@ -1,9 +1,8 @@
 gem 'minitest', '~> 5.9'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/braille_converter'
 require './lib/braille_alphabet'
-require 'pry'
+require './lib/braille_converter'
 
 class BrailleConverterTest < Minitest::Test
 
@@ -45,4 +44,27 @@ class BrailleConverterTest < Minitest::Test
 
     assert_equal [[".0","00","0."],["0.",".0","0."],["0.","00","0."],["0.","0.","0."],["00",".0",".."],["..","00","0."]], bc.array_converter
   end
+
+  def test_it_transposes_the_braille_array
+    phrase = "wo"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal [[".0","0."],["00",".0"],["0.","0."]], bc.transpose_array
+  end
+
+  def test_if_transposed_are_joined
+    phrase = "wo"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal [".00.", "00.0", "0.0."], bc.join_array
+  end
+
+  def test_if_message_translated_to_braille
+    phrase = "wo"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal ".00.\n00.0\n0.0.", bc.convert_to_braille
+
+  end
+
 end
