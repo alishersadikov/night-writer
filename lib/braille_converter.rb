@@ -1,4 +1,4 @@
-require_relative 'braille_alphabet'
+require './lib/braille_alphabet'
 require_relative 'braille_translator'
 require 'pry'
 
@@ -28,4 +28,22 @@ class BrailleConverter
       @bt.character_translator(character)
     end
   end
+
+  def transpose_array
+    array_converter.transpose
+  end
+
+  def join_array
+    transpose_array.map do |element|
+      element.join
+    end
+  end
+
+  def convert_to_braille
+    join_array.map { |position| "#{position}"}.join("\n")
+
+  end
+
+
+
 end
