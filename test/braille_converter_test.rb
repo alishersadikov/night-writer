@@ -12,7 +12,7 @@ class BrailleConverterTest < Minitest::Test
     bc = BrailleConverter.new(message)
 
     assert_equal "Hello World!", bc.message
-    assert_equal "Hello World!\nHello World!\nHello World!", bc.duplicate_message
+    assert_equal "Hello World!\nHello World!\nHello World!", bc.triple_message
     # binding.pry
   end
 
@@ -42,14 +42,14 @@ class BrailleConverterTest < Minitest::Test
     word = "world!"
     bc = BrailleConverter.new(word)
 
-    assert_equal [[".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."],["00", ".0", ".."], ["..", "00", "0."]], bc.braille_char_encoder
+    assert_equal [[".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."],["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_character
   end
 
   def test_it_converts_a_phrase_into_encoded_braille_text
     phrase = "HI, world!"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.braille_char_encoder
+    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_character
   end
 
   def test_it_converts_numbers_into_encoded_braille_text
@@ -59,10 +59,10 @@ class BrailleConverterTest < Minitest::Test
     assert_equal [[".0", ".0", "00"], ["0.", "..", ".."], ["00", "0.", ".."], [".0", "00", ".."], ["00", "0.", ".."], [".0", ".0", "00"]], bc.braille_num_encoder
   end
 
-  def test_it_converts_a_full_message_into_encoded_braille_text
-    message = "We are #1.ALISHER and #2.KINAN !!!"
-    bc = BrailleConverter.new(message)
-
-    assert_equal [[]], bc.full_braille_encoder
-  end
+  # def test_it_converts_a_full_message_into_encoded_braille_text
+  #   message = "We are #1.ALISHER and #2.KINAN !!!"
+  #   bc = BrailleConverter.new(message)
+  #
+  #   assert_equal [[]], bc.full_braille_encoder
+  # end
 end

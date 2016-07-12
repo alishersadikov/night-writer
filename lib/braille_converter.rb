@@ -8,8 +8,8 @@ class BrailleConverter
               #message_array
               :braille_characters
               #braille_array
-              :braille_numbers
-              # + braille_num_array
+              # :braille_numbers
+              # # + braille_num_array
 
   def initialize(message)
     @message = message
@@ -19,7 +19,7 @@ class BrailleConverter
     @bt = BrailleTranslator.new
   end
 
-  def duplicate_message
+  def triple_message
     "#{message}\n#{message}\n#{message}"
   end
   #triple
@@ -29,7 +29,7 @@ class BrailleConverter
   end
   #message_converter
 
-  def braille_char_encoder
+  def encode_braille_character
     @separated_message.map do |char|
       @bt.character_translator(char.downcase)
     end
@@ -51,3 +51,4 @@ class BrailleConverter
       end
     end
   end
+end
