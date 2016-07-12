@@ -29,26 +29,39 @@ class BrailleConverter
   end
   #message_converter
 
-  def encode_braille_character
+  def encode_braille_characters
     @separated_message.map do |char|
-      @bt.character_translator(char.downcase)
+      @bt.character_translator(char)
+    #   if char.downcase
+    #     @braille_characters << @bt.character_translator(char)
+    #     @braille_characters.last
+     #
+    #   elsif char.upcase
+    #     @braille_characters << @bt.character_translator("shift")
+    #     @braille_characters << @bt.character_translator(char)
+    #     @braille_characters.last
+     #
+    #     braille << alphabet[:shift] unless char == char.downcase
+    #  braille << alphabet[char.downcase]
+      # end
     end
   end
+
   #array_converter
 
-  def braille_num_encoder
+  def encode_braille_numbers
     @separated_message.map do |num|
       @bt.number_translator(num)
     end
   end
 
-  def full_braille_encoder
-    @separated_message.map.with_index do |char, num|
-      if char == BRAILLE_CHARACTERS
-        @bt.character_translator(char.downcase)
-      else
-        @bt.number_translator(num)
-      end
-    end
-  end
+  # def full_braille_encoder
+  #   @separated_message.map do |element|
+  #     if element == BRAILLE_CHARACTERS
+  #     @bt.character_translator(element.downcase)
+  #     unless element == BRAILLE_NUMBERS
+  #     @bt.number_translator(element)
+  #     end
+  #   end
+  # end
 end

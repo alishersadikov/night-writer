@@ -7,20 +7,20 @@ require 'pry'
 
 class BrailleTranslatorTest < Minitest::Test
 
-  def test_if_one_character_is_translated
+  def test_it_translates_one_character_to_encoded_braille
     bt = BrailleTranslator.new
 
-    assert_equal ["0.","..",".."], bt.character_translator("a")
-    assert_equal ["..","00","0."], bt.character_translator("!")
-    assert_equal ["..","..",".0"], bt.character_translator("shift")
+    assert_equal ["0.", "..", ".."], bt.character_translator("a")
+    assert_equal ["..", "00", "0."], bt.character_translator("!")
+    assert_equal ["..", "..", ".0"], bt.character_translator("shift")
   end
 
-  def test_if_one_number_is_translated
+  def test_it_translates_one_number_to_encoded_braille
     bt = BrailleTranslator.new
 
-    assert_equal "b", bt.inverted_char_translator(["0.","0.",".."])
-    assert_equal "'", bt.inverted_char_translator(["..","..","0."])
-    assert_equal "0", bt.inverted_num_translator([".0","00",".."])
+    assert_equal "b", bt.inverted_char_translator(["0.", "0.", ".."])
+    assert_equal "'", bt.inverted_char_translator(["..", "..", "0."])
+    assert_equal "0", bt.inverted_num_translator([".0", "00", ".."])
   end
 
 end
