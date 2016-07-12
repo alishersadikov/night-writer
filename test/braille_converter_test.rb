@@ -16,21 +16,33 @@ class BrailleConverterTest < Minitest::Test
     # binding.pry
   end
 
-  def test_if_a_word_is_converted_to_an_array
+  def test_it_converts_a_message_to_an_array_of_individual_characters
     word = "hello"
     bc = BrailleConverter.new(word)
 
-    assert_equal ["h","e","l","l","o"], bc.array_converter
-    assert_equal "", bc.
-  end  #
+    assert_equal ["h","e","l","l","o"], bc.message_converter(word)
+    # assert_equal "", bc.
+  end
+
+  def test_it_converts_another_message_to_an_array_of_individual_characters
+    phrase = "world!"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal ["w", "o", "r", "l", "d", "!"], bc.message_converter(phrase)
+  end
+
+  def test_converts_a_phrases_to_an_array
+    phrase = "hello world!"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal ["h","e","l","l","o"," ","w","o","r","l","d","!"], bc.message_converter(phrase)
+    # require "pry"; binding.pry
+  end
+
+  def test_it_converts_message_array_into_braille_array
+    phrase = "world!"
+    bc = BrailleConverter.new(phrase)
+
+    assert_equal [[".0","00","0."],["0.",".0","0."],["0.","00","0."],["0.","0.","0."],["00",".0",".."],["..","00","0."]], bc.array_converter
+  end
 end
-
-  # def test_if_a_phrases_is_converted_to_an_array
-  #   phrase = "hello world!"
-  #   bc = BrailleConverter.new(phrase)
-  #
-  #   assert_equal ["h","e","l","l","o"," ","w","o","r","l","d","!"],
-  # end
-
-  # def test_it_puts_hash_values_on_three_new_lines
-  # end
