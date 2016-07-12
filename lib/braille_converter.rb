@@ -1,4 +1,4 @@
-require_relative 'braille_alphabet'
+require './lib/braille_alphabet'
 require_relative 'braille_translator'
 require 'pry'
 
@@ -29,26 +29,44 @@ class BrailleConverter
   end
   #message_converter
 
-  def encode_braille_character
+  def encode_braille_characters
     @separated_message.map do |char|
       @bt.character_translator(char.downcase)
     end
   end
   #array_converter
 
-  def braille_num_encoder
+  def encode_braille_numbers
     @separated_message.map do |num|
       @bt.number_translator(num)
     end
   end
 
-  def full_braille_encoder
-    @separated_message.map.with_index do |char, num|
-      if char == BRAILLE_CHARACTERS
-        @bt.character_translator(char.downcase)
-      else
-        @bt.number_translator(num)
-      end
-    end
-  end
+  # def convert_to_braille_char_and_num
+  #   @separated_message.map.with_index do |char, num|
+  #     if char == BRAILLE_CHARACTERS
+  #       @bt.character_translator(char.downcase)
+  #     else
+  #       @bt.number_translator(num)
+  #     end
+  #   end
+  # end
+
+  # def transpose_array
+  #   encode_braille_characters.transpose
+  # end
+  #
+  # def join_array
+  #   transpose_array.map do |element|
+  #     element.join
+  #   end
+  # end
+  #
+  # def convert_to_full_braille
+  #   join_array.map { |position| "#{position}"}.join("\n")
+  #
+  # end
+
+
+
 end
