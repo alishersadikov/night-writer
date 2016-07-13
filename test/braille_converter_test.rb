@@ -46,7 +46,7 @@ class BrailleConverterTest < Minitest::Test
     phrase = "HI, world!"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal [["0.", "00", ".."], [".0", "0.", ".."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
+    assert_equal [["..0.", "..00", ".0.."], ["...0", "..0.", ".0.."], ["..", "0.", ".."], ["..", "..", ".."], [".0", "00", "0."], ["0.", ".0", "0."], ["0.", "00", "0."], ["0.", "0.", "0."], ["00", ".0", ".."], ["..", "00", "0."]], bc.encode_braille_characters
   end
 
   def test_it_converts_numbers_into_encoded_braille_text
@@ -67,7 +67,7 @@ class BrailleConverterTest < Minitest::Test
     phrase = "Hello! World"
     bc = BrailleConverter.new(phrase)
 
-    assert_equal ["0.0.0.0.0......00.0.0.00", "00.00.0..000..00.0000..0", "....0.0.0.0...0.0.0.0..."], bc.join_braille_characters
+    assert_equal ["..0.0.0.0.0........00.0.0.00", "..00.00.0..000....00.0000..0", ".0....0.0.0.0....0.00.0.0..."], bc.join_braille_characters
   end
 #_____________________________________
   def test_it_fully_encodes_a_word_to_braille
@@ -94,11 +94,11 @@ class BrailleConverterTest < Minitest::Test
 
   #Translate full message into braille:
   def test_it_converts_a_full_message_into_encoded_braille_text
-    skip
+
     message = "We are #1.ALISHER and #2.KINAN !!!"
     bc = BrailleConverter.new(message)
 
-    assert_equal [[]], bc.encode_braille_characters || bc.encode_braille_numbers
+    assert_equal [[]], bc.encode_braille_char_and_num
   end
 
 end
