@@ -26,9 +26,5 @@ class BrailleTranslator
   # def string_translator(string)
   #   message_array << string.each do |string|
   #   string[0]
-
-
   end
-
-
 end
