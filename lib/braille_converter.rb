@@ -31,7 +31,7 @@ class BrailleConverter
 
   def encode_braille_characters
     @separated_message.compact.map do |char|
-      @bt.character_translator(char.downcase)
+      @bt.character_translator(char)
     end
   end
   #array_converter
@@ -42,21 +42,20 @@ class BrailleConverter
     end
   end
 
-  # def encode_braille_char_and_num
-  #   @separated_message.map.with_index do |char, num|
-  #     if char == BRAILLE_CHARACTERS
-  #       @bt.character_translator(char.downcase)
-  #     else
-  #       @bt.number_translator(num)
-  #     end
-  #   end
-  # end
+  def encode_braille_char_and_num
+    @separated_message.map.with_index do |char, num|
+      if char == BRAILLE_CHARACTERS
+        @bt.character_translator(char.downcase)
+      else
+        @bt.number_translator(num)
+      end
+    end
+  end
 
-  #transpose_array
   def transpose_braille_characters
     encode_braille_characters.compact.transpose
   end
-#join_array
+
   def join_braille_characters
     transpose_braille_characters.map do |element|
       element.join
@@ -65,9 +64,9 @@ class BrailleConverter
 
   def convert_to_full_braille
     join_braille_characters.map { |position| "#{position}"}.join("\n")
-
   end
 
-
-
+  def calculate_row_length
+    (row_length/160.0).ceil
+  end
 end

@@ -7,7 +7,7 @@ require 'pry'
 
 class BrailleTranslatorTest < Minitest::Test
 
-  def test_if_one_character_is_translated
+  def test_it_translates_characters_to_encoded_braille
     bt = BrailleTranslator.new
 
     assert_equal ["0.","..",".."], bt.character_translator("a")
@@ -15,7 +15,7 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal ["..","..",".0"], bt.character_translator("shift")
   end
 
-  def test_if_one_number_is_translated
+  def test_it_translates_numbers_to_encoded_braille
     bt = BrailleTranslator.new
 
     assert_equal "b", bt.inverted_char_translator(["0.","0.",".."])
