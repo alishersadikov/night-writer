@@ -1,15 +1,11 @@
 require './lib/braille_alphabet'
-require_relative 'braille_translator'
-require 'pry'
+require './lib/braille_translator'
 
 class BrailleConverter
   attr_reader :message,
               :separated_message,
-              #message_array
-              :braille_characters
-              #braille_array
-              # :braille_numbers
-              # # + braille_num_array
+              :braille_characters,
+              :input_nums
 
   def initialize(message)
     @message = message
@@ -17,56 +13,64 @@ class BrailleConverter
     @braille_characters = []
     @braille_numbers = []
     @bt = BrailleTranslator.new
+    @input_nums = false
   end
-
-  def triple_message
-    "#{message}\n#{message}\n#{message}"
-  end
-  #triple
 
   def separate_characters(message)
     message.chars
   end
-  #message_converter
 
-  def encode_braille_characters
-    @separated_message.compact.map do |char|
-      @bt.character_translator(char)
-    end
-  end
-  #array_converter
-
-  def encode_braille_numbers
-    @separated_message.map do |num|
-      @bt.number_translator(num)
+  def braille_number_switch(element)
+    if element == element.to_i && @input_nums == false
+      @input_nums = true
+      [".0",".0","00"] + @bt.number_translator(element)
+    else
+      @bt.number_translator(element)
     end
   end
 
-  def encode_braille_char_and_num
-    @separated_message.map.with_index do |char, num|
-      if char == BRAILLE_CHARACTERS
-        @bt.character_translator(char.downcase)
+  def encode_braille_elements
+      @separated_message.map do |element|
+      if /[[:upper:]]/.match(element)
+        @input_nums = false
+        @bt.capital_translator(element)
+      elsif /[0-9]/.match(element)
+        braille_number_switch(element)
       else
-        @bt.number_translator(num)
+        @input_nums = false
+        @bt.character_translator(element)
       end
     end
   end
 
-  def transpose_braille_characters
-    encode_braille_characters.compact.transpose
+  def transpose_braille_elements
+    encode_braille_elements.compact.transpose
   end
 
-  def join_braille_characters
-    transpose_braille_characters.map do |element|
+  def join_braille_elements
+    transpose_braille_elements.map do |element|
       element.join
     end
   end
 
-  def convert_to_full_braille
-    join_braille_characters.map { |position| "#{position}"}.join("\n")
+  def convert_elements_to_full_braille
+    join_braille_elements.map { |position| "#{position}"}.join("\n")
   end
 
-  def calculate_row_length
-    (row_length/160.0).ceil
-  end
+  # def split_braille_text
+  #   convert_elements_to_full_braille.split("\n")
+  # end
+  #
+  # def measure_row_length
+  #   split_braille_text.first.length
+  # end
+  #
+  # def limit_braille_line_length
+  #   convert_elements_to_full_braille.each
+  #     if measure_row_length > 160
+  #       require "pry"; binding.pry
+  #       
+  #       end
+  #   end
+  # end
 end
