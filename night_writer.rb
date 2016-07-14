@@ -4,15 +4,14 @@ class NightWriter
   attr_reader :content
 
   def self.read_contents
-    @content = File.read(ARGV[0])
-
+    @english_content = File.read(ARGV[0])
   end
 
   def self.encode_file_to_braille
-    bc = BrailleConverter.new(@content)
+    bc = BrailleConverter.new(@english_content)
     message_contents = bc.convert_to_full_braille
     File.write(ARGV[1], message_contents)
-    puts "Created #{ARGV[1]} containing #{message_contents.length} characters"
+    puts "Created #{ARGV[1]} containing #{message_contents.length} characters."
   end
 end
 

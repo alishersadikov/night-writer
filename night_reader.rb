@@ -1,18 +1,19 @@
-class FileReader
-  attr_reader :file_reader
+require './lib/english_converter'
 
-  def initialize
-    @reader = FileReader.new
+class NightReader
+  attr_reader :braille_content
+
+  def self.read_contents
+    @braille_content = File.read(ARGV[1])
   end
 
-  def read
-    filename = ARGV[0]
-    File.read(filename)
-  end
-
-  def encode_to_braille(input)
-    # you've taken in an INPUT string
-    # do the magic
-    # send out an OUTPUT string
+  def self.decrypt_braille_to_english
+    ec = EnglishConverter.new(@braille_content)
+    message_contents = ec.join_characters
+    File.write(ARGV[0], message_contents)
+    puts "Created #{ARGV[0]} containing #{message_contents.length} characters."
   end
 end
+
+NightReader.read_contents
+NightReader.decrypt_braille_to_english
