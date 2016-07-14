@@ -1,68 +1,57 @@
 require './lib/braille_alphabet'
-require_relative 'braille_translator'
+require './lib/braille_translator'
 
 class BrailleConverter
   attr_reader :message,
               :separated_message,
-              :braille_characters
+              :braille_characters,
+              :input_nums
 
   def initialize(message)
     @message = message
     @separated_message = separate_characters(message)
-    @braille_characters = []
-    @braille_numbers = []
     @bt = BrailleTranslator.new
+    @input_nums = false
   end
-
-  def triple_message
-    "#{message}\n#{message}\n#{message}"
-  end
-  #triple
 
   def separate_characters(message)
     message.chars
   end
-  #message_converter
 
-  def encode_braille_characters
-    @separated_message.compact.map do |char|
-      @bt.character_translator(char.downcase)
-    end
-  end
-  #array_converter
-
-  def encode_braille_numbers
-    @separated_message.map do |num|
-      @bt.number_translator(num)
+  def braille_number_switch(element)
+    if element == element.to_i && @input_nums == false
+      @input_nums = true
+      [".0",".0","00"] + @bt.number_translator(element)
+    else
+      @bt.number_translator(element)
     end
   end
 
-  # def encode_braille_char_and_num
-  #   @separated_message.map.with_index do |char, num|
-  #     if char == BRAILLE_CHARACTERS
-  #       @bt.character_translator(char.downcase)
-  #     else
-  #       @bt.number_translator(num)
-  #     end
-  #   end
-  # end
-
-  #transpose_array
-  def transpose_braille_characters
-    encode_braille_characters.compact.transpose
+  def encode_braille_elements
+      @separated_message.map do |element|
+      if /[[:upper:]]/.match(element)
+        @input_nums = false
+        @bt.capital_translator(element)
+      elsif /[0-9]/.match(element)
+        braille_number_switch(element)
+      else
+        @input_nums = false
+        @bt.character_translator(element)
+      end
+    end
   end
-#join_array
-  def join_braille_characters
-    transpose_braille_characters.map do |element|
+
+  def transpose_braille_elements
+    encode_braille_elements.compact.transpose
+  end
+
+  def join_braille_elements
+    transpose_braille_elements.map do |element|
       element.join
     end
   end
 
-  def convert_to_full_braille
-    join_braille_characters.map { |position| "#{position}"}.join("\n")
-
+  def convert_elements_to_full_braille
+    join_braille_elements.map { |position| "#{position}"}.join("\n")
   end
-
-
-
 end
