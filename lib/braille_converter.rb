@@ -1,15 +1,10 @@
 require './lib/braille_alphabet'
 require_relative 'braille_translator'
-require 'pry'
 
 class BrailleConverter
   attr_reader :message,
               :separated_message,
-              #message_array
               :braille_characters
-              #braille_array
-              # :braille_numbers
-              # # + braille_num_array
 
   def initialize(message)
     @message = message
