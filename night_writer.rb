@@ -9,7 +9,7 @@ class NightWriter
 
   def self.encode_file_to_braille
     bc = BrailleConverter.new(@english_content)
-    message_contents = bc.convert_to_full_braille
+    message_contents = bc.convert_elements_to_full_braille
     File.write(ARGV[1], message_contents)
     puts "Created #{ARGV[1]} containing #{message_contents.length} characters."
   end
