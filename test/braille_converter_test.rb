@@ -1,4 +1,4 @@
-gem 'minitest', '~> 5.9'
+sgem 'minitest', '~> 5.9'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/braille_alphabet'
